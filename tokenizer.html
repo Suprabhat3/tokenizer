@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Tokenizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Smart Tokenizer
+            By Suprabhat</h1>
+            <p class="subtitle">Convert text to numbers and back with zero ambiguity</p>
+        </div>
+        <div class="content">
+            <div class="input-section">
+                <div class="input-card">
+                    <div class="card-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                        Text to Numbers
+                    </div>
+                    <input type="text" id="textInput" placeholder="Enter text like 'hello world!'">
+                    <button onclick="encodeText()">🔢 Encode</button>
+                </div>
+                
+                <div class="input-card">
+                    <div class="card-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Numbers to Text
+                    </div>
+                    <input type="text" id="numberInput" placeholder="Enter numbers like '8 5 12 12 15'">
+                    <button onclick="decodeText()">📝 Decode</button>
+                </div>
+            </div>
+            
+            <div id="result" class="result" style="display: none;"></div>
+            
+            <h3 class="section-title">Character Mapping</h3>
+            <button id="viewMappingBtn" onclick="toggleTokenMapping()"
+            ">View Character Mapping</button>
+            <div id="tokenMap" class="token-map" style="display: none;"></div>
+
+        </div>
+    </div>
+ <br>
+ <br>
+ <br>
+<!-- Footer -->
+<footer style="
+    background: #111827;
+    color: #d1d5db;
+    padding: 25px 0;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+">
+    <p style="font-size: 15px; margin-bottom: 12px;">
+        Made with ❤️ by <strong style="color: #ffffff;">Suprabhat</strong>
+    </p>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+
+        <!-- Twitter -->
+        <a href="https://x.com/Suprabhat_3" target="_blank" style="color: #d1d5db; transition: 0.3s;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775
+                1.014-.611 1.794-1.574 2.163-2.723-.949.564-2.005.974-3.127 
+                1.195-.897-.959-2.178-1.559-3.594-1.559-2.717 
+                0-4.924 2.206-4.924 4.924 0 .39.044.765.127 
+                1.124-4.09-.205-7.719-2.165-10.148-5.144-.424.729-.666 
+                1.577-.666 2.475 0 1.708.87 3.215 2.188 
+                4.099-.807-.026-1.566-.248-2.229-.616v.061c0 
+                2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 
+                0-.626-.031-.928-.088.627 1.956 2.444 3.379 
+                4.6 3.419-1.68 1.318-3.809 2.105-6.115 
+                2.105-.398 0-.79-.023-1.175-.069 2.179 1.397 4.768 
+                2.212 7.557 2.212 9.054 0 14-7.496 
+                14-13.986 0-.21 0-.423-.015-.634.962-.689 
+                1.8-1.56 2.46-2.548z"/>
+            </svg>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/Suprabhat3" target="_blank" style="color: #d1d5db; transition: 0.3s;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 
+                0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 
+                0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61 
+                -.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 
+                1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 
+                1.304 3.495.997.108-.775.418-1.305.762-1.605 
+                -2.665-.305-5.466-1.334-5.466-5.931 
+                0-1.311.469-2.381 1.236-3.221 
+                -.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 
+                3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 
+                2.045.138 3.003.404 2.292-1.552 3.299-1.23 
+                3.299-1.23.653 1.652.241 2.873.118 3.176 
+                .77.84 1.235 1.91 1.235 3.221 
+                0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 
+                0 1.606-.015 2.898-.015 3.293 
+                0 .319.218.694.825.576C20.565 22.092 24 
+                17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/suprabhatt/" target="_blank" style="color: #d1d5db; transition: 0.3s;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.026-3.039-1.852-3.039-1.853 
+                0-2.136 1.445-2.136 2.939v5.669H9.351V9h3.414v1.561h.049c.476-.9 
+                1.637-1.85 3.37-1.85 3.605 0 4.271 2.372 4.271 
+                5.456v6.285zM5.337 7.433c-1.144 0-2.069-.926-2.069-2.069 
+                0-1.144.925-2.069 2.069-2.069 1.144 0 
+                2.069.925 2.069 2.069 0 1.143-.925 
+                2.069-2.069 2.069zM6.765 20.452H3.91V9h2.855v11.452z"/>
+            </svg>
+        </a>
+    </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
