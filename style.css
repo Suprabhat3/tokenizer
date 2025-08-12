@@ -1,4 +1,4 @@
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -9,6 +9,8 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
@@ -20,6 +22,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
             animation: slideUp 0.8s ease-out;
+            flex: 1;
         }
         
         @keyframes slideUp {
@@ -223,3 +226,36 @@
             font-size: 0.9em;
             opacity: 0.8;
         }
+
+footer {
+    background: #111827;
+    color: #d1d5db;
+    padding: 25px 0;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: auto; /* This pushes footer to bottom */
+    width: 100%;
+    position: relative; /* Remove fixed positioning */
+    bottom: auto; /* Remove fixed bottom */
+    left: auto; /* Remove fixed left */
+    border-radius: 20px;
+}
+
+/* Ensure footer links have proper hover effects */
+footer a {
+    color: #d1d5db;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+footer a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Add some spacing before footer */
+footer::before {
+    content: "";
+    display: block;
+    height: 40px;
+}
